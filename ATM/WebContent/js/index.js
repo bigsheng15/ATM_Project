@@ -29,6 +29,11 @@ switchButton.refresh = function refresh(text,disable){
 	else if(atm.status == 1){
 		$("#switch").click(turnon);	
 	}
+	else if (atm.status == 2){
+		//点击关机，当状态为处理中时弹出弹窗不允许关机
+		$("#switch").click(Toturnoff);	
+	}
+	console.log("0:空闲 1:关闭 2:处理中 atm.status-->"+atm.status);
 	$("#switch").attr('disable',disable);
 }
 
@@ -95,6 +100,10 @@ function turnoff(){
 	$.post('/ATM/TurnOffServlet', function(responseText) {
 		refresh(responseText);
 	});
+}
+
+function Toturnoff(){
+	alert("系统处理中...请完成操作后退卡再关机");
 }
 
 function insertCard(){
