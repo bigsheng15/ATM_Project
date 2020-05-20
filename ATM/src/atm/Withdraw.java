@@ -9,7 +9,6 @@ package atm;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
-import banking.Account;
 import domain.Bcard;
 
 /**
@@ -58,6 +57,7 @@ public class Withdraw extends Transaction {
 		}
 	}
 	
+	
 	/**
 	 * 处理打印
 	 * @param flag 0:打印 1:不打印
@@ -83,7 +83,7 @@ public class Withdraw extends Transaction {
 								
 									+ "************收据************&#10;");
 		}
-		machine.getDisplay().setText("请选择业务 1:取款 2:存款 0:退出 ");
+		machine.getDisplay().setText("请选择业务 1:取款 2:存款 3:查询余额 0:退出 ");
 		machine.getDigitButton().stateChange(0, 0, "TransactionServlet");
 	}
 	

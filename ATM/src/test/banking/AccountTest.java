@@ -1,11 +1,9 @@
 package test.banking;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
 import atm.ATM;
-import banking.Account;
 import domain.Bcard;
 
 /**

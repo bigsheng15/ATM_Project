@@ -76,7 +76,7 @@ public class Deposit extends Transaction{
 									
 									+ "************收据************&#10;");
 		}
-		machine.getDisplay().setText("请选择业务 1:取款 2:存款 0:退出 ");
+		machine.getDisplay().setText("请选择业务 1:取款 2:存款 3:查询余额 0:退出 ");
 		machine.getDigitButton().stateChange(0, 0, "TransactionServlet");
 	}
 

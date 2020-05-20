@@ -113,6 +113,7 @@ public class ATM {
 			// 开机时需要改变ATM的状态，改变显示屏的显示，改变开关按钮的状态
 			state = SHUTDOWN;
 			this.monitor.setText("");
+			this.area.setText("");
 			this.btn_switch.stateChange(ATM.SHUTDOWN);
 		}
 	}

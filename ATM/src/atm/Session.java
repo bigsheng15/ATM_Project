@@ -7,7 +7,6 @@
 
 package atm;
 
-import banking.Account;
 import domain.Bcard;
 
 /**
@@ -57,7 +56,7 @@ public class Session {
 	}
 	
 	/**
-	 * 重新开始一个新会话
+	 * 退卡，重新开始一个新会话
 	 */
 	public void startOver() {
 		state = NOTREADY;
@@ -93,7 +92,7 @@ public class Session {
 			if(loginstate != null) {
 				state = CHOOSING;
 				ATM instance = ATM.getInstance();
-				instance.getDisplay().setText("请选择业务 1:取款 2:存款 0:退出 ");
+				instance.getDisplay().setText("请选择业务 1:取款 2:存款 3:查询余额 0:退出 ");
 				instance.getDigitButton().stateChange(0, 1, "TransactionServlet");
 			}
 			// 账户密码不正确

@@ -193,11 +193,6 @@ public class Bcard {
 		return bBalance;
 	}
 
-
-	/**
-	 * 获取账户余额
-	 * @return
-	 */
 	public void setbBalance(double bBalance) {
 		this.bBalance = bBalance;
 	}

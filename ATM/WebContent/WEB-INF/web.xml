@@ -46,6 +46,11 @@
         <servlet-name>DepositPrintServlet</servlet-name>
         <servlet-class>servlet.DepositPrintServlet</servlet-class>
     </servlet>   
+     <!--查询余额的servlet-->
+    <servlet>
+        <servlet-name>FindMoneyServlet</servlet-name>
+        <servlet-class>servlet.FindMoneyServlet</servlet-class>
+    </servlet>  
     
     <servlet-mapping>
         <servlet-name>GetStatusServlet</servlet-name>
@@ -88,5 +93,10 @@
         <servlet-name>DepositPrintServlet</servlet-name>
         <url-pattern>/DepositPrintServlet</url-pattern>
     </servlet-mapping> 
+    <!--存款的servlet-->
+     <servlet-mapping>
+        <servlet-name>FindMoneyServlet</servlet-name>
+        <url-pattern>/FindMoneyServlet</url-pattern>
+    </servlet-mapping>  
     
 </web-app>
