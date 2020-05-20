@@ -46,7 +46,7 @@ public class Bcard {
 		try{
 			bcard.bCardId = cardid;
 			bcard.bBalance = balance;
-			System.out.println("editBacrd-->"+bcard.bCardId+";"+bcard.bBalance);
+			System.out.println("==editBacrd-->"+bcard.bCardId+";"+bcard.bBalance);
 			conn =DbUtil.getConn();
 			//开启手动提交事务
 			conn.setAutoCommit(false);
@@ -61,12 +61,13 @@ public class Bcard {
 			  }catch(SQLException e){
 				  throw e;
 			  }finally{
-				  System.out.println("执行结束，editBacrd数据连接-->close");
+				  System.out.println("==执行结束，editBacrd数据连接-->close");
 				  DbUtil.close(pstmt);
 			  } 
 			//提交事务
 			conn.commit();
 		}catch (Exception e) {
+			//事务回滚
 			if(conn!=null){
 				conn.rollback();
 			}
@@ -94,7 +95,7 @@ public class Bcard {
 		ResultSet rs = null;
 		try {
 			conn = DbUtil.getConn();
-			System.out.println("login-->"+cardid+";"+pwd);
+			System.out.println("==login-->"+cardid+";"+pwd);
 			pstmt = conn
 					.prepareStatement("select * from t_card where bcard_id=? and b_pwd=?");
 			int index = 1;
@@ -114,10 +115,10 @@ public class Bcard {
 			System.out.println(" with id :" + cardid
 					+ " could not be loaded from the database.");
 		} finally {
-			System.out.println("登录之后bBalance-->"+bcard.bCardId +";"+ bcard.bPwd +";"+ bcard.bBalance);
+			System.out.println("==登录之后bBalance-->"+bcard.bCardId +";"+ bcard.bPwd +";"+ bcard.bBalance);
 //			setBcard(bCardId,bPwd,bBalance);
 			
-			System.out.println("执行结束，BcardDao数据连接-->close");
+			System.out.println("==执行结束，BcardDao数据连接-->close");
 			DbUtil.close(rs, pstmt, conn);
 		}
 		return "success";
@@ -129,22 +130,21 @@ public class Bcard {
 	 * @return 0:成功 1:不成功
 	 */
 	public int withdraw(double amount) {
-		System.out.println("当前数据-->"+bcard.bCardId +";"+ bcard.bBalance +";"+ bcard.bPwd);
-		System.out.println("bBalance-->"+bcard.bBalance+"；amount-->"+amount);
+		System.out.println("==bBalance-->"+bcard.bBalance+"；amount-->"+amount);
 		if(this.bBalance >= amount) {
-			System.out.println("withdraw取款前-->"+bcard.bBalance);
+			System.out.println("==withdraw取款前-->"+bcard.bBalance);
 			bcard.bBalance = bcard.bBalance - amount;
 			try {
-				System.out.println("执行取款-->修改余额");
 				editBacrd(bcard.bCardId,bcard.bBalance);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return 1;//失败返回1
 			}
-			System.out.println("withdraw取款后-->"+bcard.bBalance);
-			return 0;
+			System.out.println("==withdraw取款后-->"+bcard.bBalance);
+			return 0; //成功返回0
 		}
-		return 1;
+		return 1;//失败返回1
 	}
 	
 	 
@@ -153,7 +153,7 @@ public class Bcard {
 	 * 存款
 	 * @param amount
 	 */
-	public void deposit(double amount) {
+	public int deposit(double amount) {
 		bcard.bBalance += amount;
 		try {
 			editBacrd(bcard.bCardId,bcard.bBalance);
@@ -161,7 +161,9 @@ public class Bcard {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+			return 1;//失败返回
+		} 
+		return 0;  //成功返回0
 	}	
 	
 	

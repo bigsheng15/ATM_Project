@@ -6,7 +6,7 @@ atm.refresh = function refresh(status){
 	this.status = status;
 }
 
-// 屏幕对象
+// 主屏幕对象
 var display = {text:""};
 display.refresh = function refresh(text){
 	this.text = text;
@@ -14,6 +14,17 @@ display.refresh = function refresh(text){
 }
 display.show = function show(text){
 	$("#display").html(text);
+}
+
+//打印屏幕对象
+var area = {text:""};
+area.refresh = function refresh(text){
+	this.text = text;
+	$("#area").html(this.text);
+}
+area.show = function show(text){
+	text=text.replace('<br/>','/n');
+	$("#area").html(text);
 }
 
 // 按钮对象
@@ -78,6 +89,7 @@ $(document).ready(function() {
 function refresh(resp){
 	atm.refresh(resp.ATM.state);
 	display.refresh(resp.display.text);
+	area.refresh(resp.area.text);
 	switchButton.refresh(resp.switchbutton.text,resp.switchbutton.disable);
 	cardSlot.refresh(resp.cardslot.text,resp.cardslot.inserted);
 	digitButton.refresh(resp.digitbutton.state,resp.digitbutton.visibility,resp.digitbutton.servletName);

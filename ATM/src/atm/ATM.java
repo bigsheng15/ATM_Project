@@ -26,6 +26,10 @@ public class ATM {
 	private Session session = null;
 	// 显示屏对象
 	private Display monitor = null;
+	
+	// 显示屏对象
+	private Area area = null;
+	
 	// ATM开关按钮对象
 	private SwitchButton btn_switch = null;
 	// 插卡孔对象
@@ -41,6 +45,10 @@ public class ATM {
 		return this.monitor;
 	}
 	
+	public Area getArea() {
+		return this.area;
+	}
+
 	public SwitchButton getSwitchButton() {
 		return this.btn_switch;
 	}
@@ -67,6 +75,7 @@ public class ATM {
 		// 系统启动时，默认ATM状态为空闲
 		session = new Session();
 		monitor = new Display();
+		area = new Area();
 		btn_switch = new SwitchButton();
 		card_slot = new CardSlot();
 		bton_digit = new DigitButton();
@@ -91,6 +100,7 @@ public class ATM {
 			// 关机时需要改变ATM的状态，改变显示屏的显示，改变开关按钮的状态
 			state = IDLE;
 			this.monitor.setText("请插入你的银行卡");
+//			this.area.setText("这是打印   &#10 再换行 &#10  打印打印打印");
 			this.btn_switch.stateChange(ATM.IDLE);
 		}
 	}
@@ -141,6 +151,8 @@ public class ATM {
 		output += "\"session\":" + this.session.toString();
 		output += ",";
 		output += "\"display\":" + this.monitor.toString();
+		output += ",";
+		output += "\"area\":" + this.area.toString();
 		output += ",";
 		output += "\"switchbutton\":" + this.btn_switch.toString();
 		output += ",";

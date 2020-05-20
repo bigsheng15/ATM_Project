@@ -37,6 +37,16 @@
         <servlet-name>WithdrawPrintServlet</servlet-name>
         <servlet-class>servlet.WithdrawPrintServlet</servlet-class>
     </servlet>     
+     <!--存款的servlet-->
+    <servlet>
+        <servlet-name>DepositServlet</servlet-name>
+        <servlet-class>servlet.DepositServlet</servlet-class>
+    </servlet> 
+   	<servlet>
+        <servlet-name>DepositPrintServlet</servlet-name>
+        <servlet-class>servlet.DepositPrintServlet</servlet-class>
+    </servlet>   
+    
     <servlet-mapping>
         <servlet-name>GetStatusServlet</servlet-name>
         <url-pattern>/GetStatusServlet</url-pattern>
@@ -68,6 +78,15 @@
     <servlet-mapping>
         <servlet-name>TransactionServlet</servlet-name>
         <url-pattern>/TransactionServlet</url-pattern>
+    </servlet-mapping> 
+    <!--存款的servlet-->
+     <servlet-mapping>
+        <servlet-name>DepositServlet</servlet-name>
+        <url-pattern>/DepositServlet</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>DepositPrintServlet</servlet-name>
+        <url-pattern>/DepositPrintServlet</url-pattern>
     </servlet-mapping> 
     
 </web-app>

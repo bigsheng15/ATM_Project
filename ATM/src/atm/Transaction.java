@@ -90,10 +90,13 @@ public class Transaction {
 	public static Transaction makeTransaction(Session session, Bcard bcard, int options) {
 		Transaction tmp = null;
 		switch(options) {
-			case TYPE_WITHDRAW: 
+			case TYPE_WITHDRAW: //取钱
 				tmp = new Withdraw(session,bcard);
 				break;
-			case TYPE_EXIT:
+			case TYPE_DEPOSIT:  //存取
+				tmp = new Deposit(session,bcard);
+				break;
+			case TYPE_EXIT: //关机
 				// 插卡孔状态要变 开关按钮状态要变 显示屏状态要变 数字键盘状态要变
 				ATM machine = ATM.getInstance();
 				machine.setState(ATM.IDLE);
@@ -107,17 +110,33 @@ public class Transaction {
 	}
 	
 	/**
-	 * 把执行用户的请求
+	 * 把执行用户的请求,在Withdraw中已重写方法
 	 */
 	public void execute() {
 		
 	}
 	
 	/**
+	 * 把执行用户的请求,在Withdraw中已重写方法
+	 */
+	public void execute1() {
+		
+	}
+	
+	
+	/**
 	 * 处理打印
-	 * @param flag 0:打印 1:不打印
+	 * @param flag 0:打印 1:不打印 在Withdraw中已重写方法
 	 */
 	public void print(int flag) {
+		
+	}
+	
+	/**
+	 * 处理打印
+	 * @param flag 0:打印 1:不打印 在Withdraw中已重写方法
+	 */
+	public void print1(int flag) {
 		
 	}
 	
