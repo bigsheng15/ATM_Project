@@ -1,5 +1,7 @@
 package atm;
 
+import domain.Bcard;
+
 /**
  * 
      * @ClassName: Transfer
@@ -8,6 +10,11 @@ package atm;
      * @date 2020年5月20日 下午6:12:55
      *
  */
-public class Transfer {
+public class Transfer extends Transaction{
+
+	public Transfer(Session session, Bcard bcard) {
+		super(session, bcard);
+		// TODO Auto-generated constructor stub
+	}
 
 }

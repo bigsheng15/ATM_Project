@@ -33,7 +33,8 @@ switchButton.refresh = function refresh(text,disable){
 	this.text = text;
 	this.disable = disable;
 	$("#switch").html(text);
-	$("#switch").unbind("click");
+	$("#switch").unbind("click");//unbind去除点击动作
+	$("#cancel").unbind("click");
 	if(atm.status == 0){
 		$("#switch").click(turnoff);
 	}
@@ -43,9 +44,17 @@ switchButton.refresh = function refresh(text,disable){
 	else if (atm.status == 2){
 		//点击关机，当状态为处理中时弹出弹窗不允许关机
 		$("#switch").click(Toturnoff);	
-	}
+		$("#cancel").html("返回首页");
+		$("#cancel").click(cancel);	
+		
+	} 
+		
 	console.log("0:空闲 1:关闭 2:处理中 atm.status-->"+atm.status);
 	$("#switch").attr('disable',disable);
+}
+
+function cancel(){
+	alert("返回首页按钮");
 }
 
 // 插卡孔
@@ -97,7 +106,7 @@ function refresh(resp){
 
 function getStatus(){
 	$.post('/ATM/GetStatusServlet', function(responseText) {
-		console.log(responseText);
+		console.log("responseText-->"+responseText);
 		refresh(responseText);
 	});
 }
@@ -131,6 +140,8 @@ function submitNum(number){
 		num = 0;
 	});	
 }
+
+
 
 function submit(){
 	//console.log("num="+num);

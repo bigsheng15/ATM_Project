@@ -85,19 +85,23 @@ public class Session {
 	public void auth(String pwd) {
 		
 		System.out.println("验证银行卡密码-会话的状态state-->"+state);
+		ATM instance = ATM.getInstance();
 		if(state ==  AUTHENTICATION) {
 			this.pwd = pwd;
 			String loginstate =  cardDao.login( this.cardNo,  this.pwd);
 			// 账户密码正确
 			if(loginstate != null) {
 				state = CHOOSING;
-				ATM instance = ATM.getInstance();
+				
 				instance.getDisplay().setText("请选择业务 1:取款 2:存款 3:查询余额 0:退出 ");
 				instance.getDigitButton().stateChange(0, 1, "TransactionServlet");
 			}
 			// 账户密码不正确
 			else {
-				
+				instance.getDisplay().setText("密码错误，请重新输入密码：");
+//				instance.getSwitchButton().stateChange(2);//处理状态
+//				instance.getCardSlot().insert();
+				instance.getDigitButton().stateChange(1, 1, "AuthServlet");
 			}
 		}
 	}
